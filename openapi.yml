@@ -1,0 +1,45 @@
+openapi: 3.0.3
+info:
+  title: 情報工学実験のアプリ
+  description: ''
+  version: v0.1.0
+servers:
+  - url: https://example.com/api/v1/
+paths:
+  /upload:
+    post:
+      summary: 写真のアップロード先
+      description: ''
+      operationId: ''
+      requestBody:
+        description: 画像をbase64エンコードしてJSONに詰めて送る
+        content:
+          application/json:
+            examples:
+              例1:
+                value: |
+                  {
+                    "attatchment": {
+                      "base64": "TWFuIGlzIGRpc3Rpbmd1aXNoZWQsIG5vdCB..."
+                    }
+                  }
+      responses:
+        default:
+          description: レスポンス
+          content:
+            application/json:
+              examples:
+                例1:
+                  value: |
+                    {
+                      "name": "バンバンジー豆腐",
+                      "price": 132,
+                      "kcal": 134,
+                      "protein": 10.2,
+                      "fat": 7.4,
+                      "carbohydrate": 7.8,
+                      "salt": 1.2,
+                      "calcium": 3,
+                      "vegetable": 30
+                    }
+
