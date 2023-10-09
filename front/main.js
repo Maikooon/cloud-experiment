@@ -1,4 +1,5 @@
 import './style.css';
+import 'bulma/css/bulma.css';
 
 document.querySelector('#app').innerHTML = `
   <div>
