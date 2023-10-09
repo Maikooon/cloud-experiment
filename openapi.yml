@@ -15,6 +15,14 @@ paths:
         description: 画像をbase64エンコードしてJSONに詰めて送る
         content:
           application/json:
+            schema:
+              type: object
+              properties:
+                attatchment:
+                  type: object
+                  properties:
+                    base64:
+                      type: string
             examples:
               例1:
                 value: |
@@ -24,10 +32,31 @@ paths:
                     }
                   }
       responses:
-        default:
-          description: レスポンス
+        '200':
+          description: OK
           content:
             application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  price:
+                    type: number
+                  kcal:
+                    type: number
+                  protein:
+                    type: number
+                  fat:
+                    type: number
+                  carbonhydrate:
+                    type: number
+                  salt:
+                    type: number
+                  calcium:
+                    type: number
+                  vegetable:
+                    type: number
               examples:
                 例1:
                   value: |
