@@ -15,9 +15,9 @@
   <header id="top">
       <nav>
         <ul>
-          <li class="current"><a href="index.html">Home</a></li>
-          <li><a href="#">Calcurate nuturient</a></li>
-          <li><a href="#">Menu</a></li>
+          <li><a href="index.html">Home</a></li>
+          <li class = "current"><a href="add-image.html">Calcurate nuturient</a></li>
+          <li><a href="show-menu.html">Menu</a></li>
         </ul>
       </nav>
   </header>
@@ -39,12 +39,14 @@
           </div>
       </div>
   </section>
+  <br><br>
 
   <!-- いかにページ別のコードを書きます -->
   <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <meta name="viewport" content="500px" height="100px" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script>
+        /* ビューポートの設定 */
       function changeImageToBase64() {
         const uploadImage = document.querySelector('#uploadImage')
         const file = uploadImage.files[0]
@@ -67,15 +69,11 @@
           
           // base64Textにテキストをつけて、画像を#uploadImageAreaに表示
           document.querySelector('#base64text').value = base64Text
-          document.querySelector('#uploadImageArea').innerHTML = `<img src="${base64Text}" width="100%" />`   
+          document.querySelector('#uploadImageArea').innerHTML = `<img src="${base64Text}" width="40%" />`   
         }
         reader.readAsDataURL(file)
       }
     </script>
-    <div id="main">
-        <center><p>今日のご飯をアップロードする</p></center>
-      </div>
-      
       <div>
           <form>
           <div class="mb-3 d-flex">
@@ -84,34 +82,77 @@
           </div>
           <!-- base64に変更したものを表示-->
           <textarea id="base64text" class="form-control mb-3" rows="6"></textarea> 
-          <div id="uploadImageArea"></div>
+          <section class="wrapper2">
+            <div class="container">
+                <div class="content">
+                    <div class="content-item">
+                        <div id="uploadImageArea"></div>
+                    </div>
+                    <div class="content-item">
+                        <div class="text">
+                            <h2 class="heading">Today's nuturient</h2>
+                              <p>price: <span id="price"></span></p>
+                              <p>kcal: <span id="kcal"></span></p>
+                              <p>protein <span id="protein"></span></p>
+                              <p>fat: <span id="fat"></span></p>
+                              <p>carbohydrate: <span id="carbohydrate"></span></p>
+                              <p>salt: <span id="salt"></span></p>
+                              <p>calcium: <span id="calcium"></span></p>
+                              <p>vegetable: <span id="vegetable"></span></p>
+                              <p>recommendation: <span id="reconmmendation"></span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
         </form>
       </div>
       
       <div>
-          <p>計算結果</p>
-          <p>Name: <span id="productName"></span></p>
-          <p>Price: <span id="productPrice"></span></p>
           <script>
-            // APIからデータを受け取ったと仮定
-            const apiResponse = {
-                name: "Example Product",
-                price: 19.99,
-                kcal: 250,
-                protein: 10,
-                fat: 5,
-                carbonhydrate: 30,
-                salt: 1,
-                calcium: 100,
-                vegetable: 2,
-            };
-    
-            // データを表示
-            document.getElementById("productName").textContent = apiResponse.name;
-            document.getElementById("productPrice").textContent = apiResponse.price;
-            // 他のプロパティも同様に表示
-        </script>
+           fetch("https://pokeapi.co/api/v2/pokemon/1/")
+              .then(response => response.json())
+              .then(data => {
+               const abilities = data.abilities.map(ability => ability.ability.name).join(", ");
+               const slot = data.abilities.map(slot => slot.slot).join(", ");
 
+               document.getElementById("abilities").textContent = abilities;
+               document.getElementById("slot").textContent = slot;
+            })
+             .catch(error => console.error("An error occurred:", error));
+           </script>
+
+        <!-- ここからが本番用 ,URL からデータを撮ってくる-->
+           <script>
+            fetch("https://pokeapi.co/api/v2/pokemon/1/")
+               .then(response => response.json())
+               .then(data => {
+                const name = data.sum.map(name => name.name).join(", ");
+
+                const price = data.sum.map(price => price.price).join(", ");
+                const kcal = data.sum.map(kcal => kcal.kcal).join(", ");
+                const protein = data.sum.map(protein => protein.protein).join(", ");
+                const fat = data.sum.map(fat => fat.fat).join(", ");
+                const carbohydrate = data.sum.map(carbohydrate => carbohydrate.carbohydrate).join(", ");
+                const salt = data.sum.map(salt => salt.salt).join(", ");
+                const calcium = data.sum.map(calcium => calcium.calcium).join(", ");
+                const vegetable = data.sum.map(vegetable => vegetable.vegetable).join(", ");
+                const recommendation = data.recommendation;
+ 
+                document.getElementById("name").textContent = name;
+                document.getElementById("price").textContent = price;
+                document.getElementById("kcal").textContent = kcal;
+                document.getElementById("protein").textContent = protein;
+                document.getElementById("fat").textContent = fat;
+                document.getElementById("carbohydrate").textContent = carbohydrate;
+                document.getElementById("salt").textContent = salt;
+                document.getElementById("calcium").textContent = calcium;
+                document.getElementById("vegetable").textContent = vegetable;
+                document.getElementById("recommendation").textContent =recommendation ;
+
+             })
+              .catch(error => console.error("An error occurred:", error));
+            </script>
       </div>
   <!-- ここまで -->
   
