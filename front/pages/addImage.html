@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>栄養表示ページ</title>
+  </head>
+  <body>
+    <div id="main">
+    <p>画像内の栄養を表示します。</p>
+    </div>
+    
+    <div>
+      <p>プレビュー</p>
+      <img id="preview"> 
+    <form action="test.html" method="post" enctype="multipart/form-data" >
+        <input type="file" name="test" onchange="previewFile(this);">
+        <!-- 画像を送信-->
+        <input type="submit" value="計算する">
+      </form>
+      
+    </div>
+    
+    <div>
+        <p>計算結果を表示します</p>
+    </div>
+     
+      <script>
+      function previewFile(hoge){
+        var fileData = new FileReader();
+        fileData.onload = (function() {
+          //id属性が付与されているimgタグのsrc属性に、fileReaderで取得した値の結果を入力することで
+          //プレビュー表示している
+          document.getElementById('preview').src = fileData.result;
+        });
+        fileData.readAsDataURL(hoge.files[0]);
+      }
+      </script>
+  
+  </body>
+</html>
