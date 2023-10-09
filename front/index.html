@@ -1,103 +1,95 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>no title</title>
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sample Cafe</title>
+  <link rel="stylesheet" href="css/html5reset-1.6.1.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/topImage.css">
+</head>
+
+<body id="home">
+  <header id="top">
+      <nav>
+        <ul>
+          <li class="current"><a href="index.html">Home</a></li>
+          <li><a href="#">Calcurate nuturient</a></li>
+          <li><a href="#">Menu</a></li>
+        </ul>
+      </nav>
+  </header>
+
   <body>
     <div id="app"></div>
     <script type="module" src="/main.js"></script>
+
     <!--ここから書き始めます-->
     <center>
-    <h1>Food Analyze</h1>
-<!--
-<body background="/images/food.jpg">
--->
+  <section class="wrapper">
+      <div class="container">
+          <div class="content">
+              <h2 class="heading">app name</h2>
+              <div class="list">
+                  <div class="list-item"> </div>
+                  <div class="list-item"></div>
+              </div>
+          </div>
+      </div>
+  </section>
+  
+  
 
-    <!-- <img src="https://media.delishkitchen.tv/article/1619/7lzlq3zp96i.jpeg?version=1650949358.jpg">
-    <ul class="menu cf">
-      <li><a href="">calculate today's nuturient</a></li>
-      <li><a href="">menu item</a></li>
-      <li><a href="">3</a></li>
-      <li><a href="">4</a></li>
-    </ul> -->
     <div class="menu-overlay">
-      <img src="https://media.delishkitchen.tv/article/1619/7lzlq3zp96i.jpeg?version=1650949358.jpg" class="background-image">
       <ul class="menu cf">
-        <li><a href="">calculate today's nutrient</a></li>
-        <li><a href="">menu item</a></li>
-        <li><a href="">3</a></li>
-        <li><a href="">4</a></li>
+        <li><a href="add-image.html">calculate nutrient</a></li>
+        <li><a href="show-menu.html">menu item</a></li>
+        <li><a href="past-record.html">past record</a></li>
       </ul>
     </div>
-    
-    <br><br><br>  <br><br><br>  <br><br><br>
-    
-    <!--目次的な-->>
-    <div class="card-container">
-      <div class="card-img">
-          <a href="#"><img width="768" height="512" src="https://www.nairestyle.com/html/upload/save_image/1126173951_61a09d570d6ef.jpg" alt="" /></a>
-      </div>
-      <div class="card-text">
-          <a href="#"><h2>タイトル</h2></a>
-          <p>テキストが入る要素...</p>
-      </div>
-  </div>
-  <br>
-  <br>
 
-    <!--ここからカード-->
-      <div class="card-group">
-        <div class="card">
-          <div class="card__imgframe"></div>
-          <div class="card__textbox">
-            <div class="card__titletext">
-              タイトルがはいります。タイトルがはいります。
-            </div>
-            <div class="card__overviewtext">
-              概要がはいります。概要がはいります。概要がはいります。概要がはいります。
-            </div>
+    <!-- レコメンド表示 -->
+    <section class="wrapper2">
+      <div class="container">
+          <div class="content">
+              <div class="content-item">
+                  <img src="../static/pict/top.png" class="image">
+              </div>
+              <div class="content-item">
+                  <div class="text">
+                      <h2 class="heading">本日のおススメ！</h2>
+                      <p>本日のおすすめはこのうどんです！　ほうれん草などと一緒に食べるといいです！</p>
+                  </div>
+              </div>
           </div>
-        </div>
-        <div class="card">
-          <div class="card__imgframe"></div>
-          <div class="card__textbox">
-            <div class="card__titletext">
-              タイトルがはいります。タイトルがはいります。
-            </div>
-            <div class="card__overviewtext">
-              概要がはいります。概要がはいります。概要がはいります。概要がはいります。
-            </div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card__imgframe"></div>
-          <div class="card__textbox">
-            <div class="card__titletext">
-              タイトルがはいります。タイトルがはいります。
-            </div>
-            <div class="card__overviewtext">
-              概要がはいります。概要がはいります。概要がはいります。概要がはいります。
-            </div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card__imgframe"></div>
-          <div class="card__textbox">
-            <div class="card__titletext">
-              タイトルがはいります。タイトルがはいります。
-            </div>
-            <div class="card__overviewtext">
-              概要がはいります。概要がはいります。概要がはいります。概要がはいります。
-            </div>
-          </div>
-        </div>
       </div>
-      
+  </section>
+  
+  <!-- 目次 -->
+    <section class="wrapper3">
+      <div class="container">
+          <div class="content">
+              <h2 class="heading">Another Service</h2>
+              <div class="list">
+                  <div class="list-item">
+                      <img src="./images/food.jpg" class="image">
+                      <div class="text">ここからは写真をアップロードすることで栄養素を計算できます</div>
+                  </div>
+                  <div class="list-item">
+                      <img src="./images/food.jpg" class="image">
+                      <div class="text">ここからはメニュー一覧を見ることができます</div>
+                  </div>
+                  <div class="list-item">
+                      <img src="./images/food.jpg" class="image">
+                      <div class="text">過去の栄養素も計算することができます</div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
     </div>
-    <p><button onclick="location.href='./add-image.html'">遷移</button></p>
-    
  </center>
    
   </body>

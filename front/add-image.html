@@ -1,9 +1,48 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sample Cafe</title>
+  <link rel="stylesheet" href="css/html5reset-1.6.1.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/topImage.css">
+</head>
+
+<body id="home">
+  <header id="top">
+      <nav>
+        <ul>
+          <li class="current"><a href="index.html">Home</a></li>
+          <li><a href="#">Calcurate nuturient</a></li>
+          <li><a href="#">Menu</a></li>
+        </ul>
+      </nav>
+  </header>
+
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/main.js"></script>
+
+    <!--ここから書き始めます-->
+    <center>
+  <section class="wrapper">
+      <div class="container">
+          <div class="content">
+              <h2 class="heading">DRINK</h2>
+              <div class="list">
+                  <div class="list-item"> </div>
+                  <div class="list-item"></div>
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <!-- いかにページ別のコードを書きます -->
+  <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>栄養表示ページ</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script>
       function changeImageToBase64() {
@@ -33,29 +72,58 @@
         reader.readAsDataURL(file)
       }
     </script>
-  </head>
-  <body>
     <div id="main">
-      <center><p>今日のご飯をアップロードする</p></center>
-    </div>
+        <center><p>今日のご飯をアップロードする</p></center>
+      </div>
+      
+      <div>
+          <form>
+          <div class="mb-3 d-flex">
+            <input type="file" class="form-control me-2" id="uploadImage" />
+            <button type="button" class="btn btn-primary form-control w-25" onclick="changeImageToBase64()">計算する</button>
+          </div>
+          <!-- base64に変更したものを表示-->
+          <textarea id="base64text" class="form-control mb-3" rows="6"></textarea> 
+          <div id="uploadImageArea"></div>
+        </form>
+      </div>
+      
+      <div>
+          <p>計算結果</p>
+          <p>Name: <span id="productName"></span></p>
+          <p>Price: <span id="productPrice"></span></p>
+          <script>
+            // APIからデータを受け取ったと仮定
+            const apiResponse = {
+                name: "Example Product",
+                price: 19.99,
+                kcal: 250,
+                protein: 10,
+                fat: 5,
+                carbonhydrate: 30,
+                salt: 1,
+                calcium: 100,
+                vegetable: 2,
+            };
     
-    <div>
-        <form>
-        <div class="mb-3 d-flex">
-          <input type="file" class="form-control me-2" id="uploadImage" />
-          <button type="button" class="btn btn-primary form-control w-25" onclick="changeImageToBase64()">計算する</button>
-        </div>
-        <!-- base64に変更したものを表示-->
-        <textarea id="base64text" class="form-control mb-3" rows="6"></textarea> 
-        <div id="uploadImageArea"></div>
-      </form>
-    </div>
-    
-    <div>
-        <p>計算結果</p>
-    </div>
+            // データを表示
+            document.getElementById("productName").textContent = apiResponse.name;
+            document.getElementById("productPrice").textContent = apiResponse.price;
+            // 他のプロパティも同様に表示
+        </script>
+
+      </div>
+  <!-- ここまで -->
   
+  <p><button onclick="location.href='./index.html'" style="background-color: orange; border-radius: 50px;"> back </button></p>
+  
+
+    
+  
+    
+
+    
+ </center>
+   
   </body>
 </html>
-
-
