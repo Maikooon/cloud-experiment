@@ -14,7 +14,12 @@
         // ファイルを読み取った後にコールバックで行われる処理
         reader.onload = (event) => {
           const base64Text = event.currentTarget.result
-
+          // json形式にする 
+          var obj = {"attribute":{"base64":base64Text}}
+          var json_str = JSON.stringify(obj)
+          console.log(json_str)
+          console.log(typeof json_str)
+          
           // base64Textにテキストをつけて、画像を#uploadImageAreaに表示
           document.querySelector('#base64text').value = base64Text
           document.querySelector('#uploadImageArea').innerHTML = `<img src="${base64Text}" width="100%" />`   
@@ -34,7 +39,7 @@
           <input type="file" class="form-control me-2" id="uploadImage" />
           <button type="button" class="btn btn-primary form-control w-25" onclick="changeImageToBase64()">計算する</button>
         </div>
-        <!-- base64に変更-->
+        <!-- base64に変更したものを表示-->
         <textarea id="base64text" class="form-control mb-3" rows="6"></textarea> 
         <div id="uploadImageArea"></div>
       </form>
