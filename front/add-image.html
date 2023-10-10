@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>栄養表示ページ</title>
+    <link rel="stylesheet" href="css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script type="module">
       import json from "./data.json" assert { type: "json" };
@@ -17,7 +18,7 @@
         reader.onload = (event) => {
           const base64Text = event.currentTarget.result
            // json形式にする
-           const obj = {"attatchment":{"base64":base64Text}};
+          const obj = {"attatchment":{"base64":base64Text}};
           // Post通信
           const postRes = fetch("https://yprgdia3yl.execute-api.us-east-1.amazonaws.com/dev/upload", {
             method: "POST",
@@ -28,10 +29,10 @@
           });
           
           // base64Textにテキストをつけて、画像を#uploadImageAreaに表示
-          /*
+          
           document.querySelector('#base64text').value = base64Text
           document.querySelector('#uploadImageArea').innerHTML = `<img src="${base64Text}" width="100%" />`   
-          */
+          
           // jsonデータを読み込む(json)
           const parsed = JSON.parse(json);
           document.querySelector('#result').value = parsed
@@ -50,18 +51,19 @@
     
     <div>
         <form>
-        <div class="mb-3 d-flex">
-          <input type="file" class="form-control me-2" id="uploadImage" />
-          <button type="button" class="btn btn-primary form-control w-25" onclick="changeImageToBase64()">計算する</button>
+        <div class="center">
+          <input type="file" class="form-control file" id="uploadImage" />
+          <center><button type="button" class="btn btn-primary form-control w-25" onclick="changeImageToBase64()">計算する</button></center>  
+          <div id="uploadImageArea"></div> 
+          <br>
         </div>
-        <!-- base64に変更したものを表示-->
-        <!-- <textarea id="base64text" class="form-control mb-3" rows="6"></textarea> -->
-        <!-- <div id="uploadImageArea"></div> -->
-      </form>
+        </form>
+
+        
     </div>
     
     <div>
-        <p>計算結果</p>
+        <center><p>計算結果</p></center>
         <textarea id="result" class="calc" rows="6"></textarea> 
     </div>
   
