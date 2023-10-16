@@ -14,6 +14,9 @@
         const file = uploadImage.files[0]
 
         const reader = new FileReader()
+
+           
+          
         // ファイルを読み取った後にコールバックで行われる処理
         reader.onload = (event) => {
           const base64Text = event.currentTarget.result
@@ -27,10 +30,9 @@
             },
             body: JSON.stringify(obj),
           });
-          
           // base64Textにテキストをつけて、画像を#uploadImageAreaに表示
-          document.querySelector('#base64text').value = base64Text
-          document.querySelector('#uploadImageArea').innerHTML = `<img src="${base64Text}" width="100%" />`   
+          document.querySelector('#base64text').value = base64Text;
+          document.querySelector('#uploadImageArea').innerHTML = `<img src="${base64Text}" width="100%" />`;
           
           // jsonデータを読み込む(json)
           const parsed = JSON.parse(json);
