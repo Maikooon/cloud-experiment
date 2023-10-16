@@ -1,6 +1,8 @@
+import json
+import boto3
 import difflib
 
-input = ['Medium Size', 'Samon rice bowl(1arge)', 'M', '7.1']
+nutrients = {'kcal' : 2650 , 'protein' : 65, 'calcium' : 800, 'vegetable' : 21}
 
 menu_list = [
     ['バンバンジー豆腐', 'bang bang chicken with tofu',132,134,10.2,7.4,7.8,1.2,3,30,'副菜'],
@@ -57,32 +59,107 @@ menu_list = [
 
 def search_menu(input, menu_list):
     text_list = []
+    idx_list = []
     for text in input:
         text_list.append(text.lower())
     for text in text_list:
         for idx in range(0,49):
             rate = difflib.SequenceMatcher(None, text, menu_list[idx][1]).ratio()
             #print(rate)
-            if rate > 0.85:
-                return idx
-    return 'no matching'
-
-def create_dict(idx, menu_list):
+            if rate > 0.92:
+                #print(rate)
+                idx_list.append(idx)
+    return idx_list
+    
+def create_dict(idx_list, menu_list):
+    sum_price = 0
+    sum_kcal = 0
+    sum_protein = 0
+    sum_fat = 0
+    sum_carbohydrate = 0
+    sum_salt = 0
+    sum_calcium = 0
+    sum_vegetable = 0
+    menus = []
+    for idx in idx_list:
+        menu = {}
+        menu['name'] = menu_list[idx][0]
+        menu['price'] = menu_list[idx][2]
+        menu['kcal'] = menu_list[idx][3]
+        menu['protein'] = menu_list[idx][4]
+        menu['fat'] = menu_list[idx][5]
+        menu['carbohydrate'] = menu_list[idx][6]
+        menu['salt'] = menu_list[idx][7]
+        menu['calcium'] = menu_list[idx][8]
+        menu['vegetable'] = menu_list[idx][9]
+        menus.append(menu)
+        sum_price += int(menu_list[idx][2])
+        sum_kcal += int(menu_list[idx][3])
+        sum_protein += float(menu_list[idx][4])
+        sum_fat += float(menu_list[idx][5])
+        sum_carbohydrate += float(menu_list[idx][6])
+        sum_salt += float(menu_list[idx][7])
+        sum_calcium += float(menu_list[idx][8])
+        sum_vegetable += float(menu_list[idx][9])
+    sum = {}
+    sum['price'] = sum_price
+    sum['kcal'] = sum_kcal
+    sum['protein'] = sum_protein
+    sum['fat'] = sum_fat
+    sum['carbohydrate'] = sum_carbohydrate
+    sum['salt'] = sum_salt
+    sum['calcium'] = sum_calcium
+    sum['vegetable'] = sum_vegetable
     dict = {}
-    dict['name'] = menu_list[idx][0]
-    dict['price'] = menu_list[idx][1]
-    dict['kcal'] = menu_list[idx][2]
-    dict['protein'] = menu_list[idx][3]
-    dict['fat'] = menu_list[idx][4]
-    dict['carbohydrate'] = menu_list[idx][5]
-    dict['salt'] = menu_list[idx][6]
-    dict['calcium'] = menu_list[idx][7]
-    dict['vegerable'] = menu_list[idx][8]
+    dict['menus'] = menus
+    dict['sum'] = sum
     return dict
+    
+def cover_menu(kind, menu_list):
+    max = 0
+    menu_idx = 0
+    for i in range(0,49):
+        value = menu_list[i][kind] / menu_list[i][2]
+        if value >= 0 and value > max:
+            max = value
+            menu_idx = i
+    return menu_idx
 
-d = {}
-d = create_dict(search_menu(input, menu_list), menu_list)
+def suggestion(dict, nutrients):
+    rate_kcal = (nutrients['kcal'] - dict['sum']['kcal']) / nutrients['kcal']
+    rate_protein = (nutrients['protein'] - dict['sum']['protein']) / nutrients['protein']
+    rate_vegetable = ((nutrients['vegetable'] - dict['sum']['vegetable']) / nutrients['vegetable']) * 0.05
+    if rate_kcal == max(rate_kcal, rate_protein, rate_vegetable):
+        menu_idx = cover_menu(3, menu_list)
+        return 'エネルギーが' + str(nutrients['kcal'] - dict['sum']['kcal']) + '不足しています．' + menu_list[menu_idx][0] + 'を提案します．また，カルシウムが' + str(nutrients['calcium'] - dict['sum']['calcium']) + '不足しています．ほうれん草のごまあえを提案します．'
+    elif rate_protein == max(rate_kcal, rate_protein, rate_vegetable):
+        menu_idx = cover_menu(4, menu_list)
+        return 'タンパク質が' + str(nutrients['protein'] - dict['sum']['protein']) + '不足しています．' + menu_list[menu_idx][0] + 'を提案します．また，カルシウムが' + str(nutrients['calcium'] - dict['sum']['calcium']) + '不足しています．ほうれん草のごまあえを提案します．'
+    else:
+        menu_idx = cover_menu(9, menu_list)
+        return '野菜が' + str(nutrients['vegetable'] - dict['sum']['vegetable']) + '不足しています．' + menu_list[menu_idx][0] + 'を提案します．また，カルシウムが' + str(nutrients['calcium'] - dict['sum']['calcium']) + '不足しています．ほうれん草のごまあえを提案します．'
+    
+def lambda_handler(event, context):
+    
+    bucket="suzuka-testbucket"
+    document="S__61128775.jpg"
+    client = boto3.client('textract')
 
-for k,v in d.items():
-    print(k + ' : ' + str(v))
+    #process using S3 object
+    response = client.detect_document_text(
+        Document={'S3Object': {'Bucket': bucket, 'Name': document}})
 
+    #Get the text blocks
+    blocks=response['Blocks']
+    input = []
+    for block in blocks:
+        if "Text" in block:
+            input.append(block["Text"])
+    
+    d = create_dict(search_menu(input, menu_list), menu_list)
+    d['suggest'] = suggestion(d, nutrients)
+    
+    return {
+        'statusCode': 200,
+        'body': json.dumps(d)
+    }                
