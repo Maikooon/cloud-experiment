@@ -29,7 +29,6 @@
           });
           
           // base64Textにテキストをつけて、画像を#uploadImageAreaに表示
-          
           document.querySelector('#base64text').value = base64Text
           document.querySelector('#uploadImageArea').innerHTML = `<img src="${base64Text}" width="100%" />`   
           
@@ -49,22 +48,17 @@
       <center><p>今日のご飯をアップロードする</p></center>
     </div>
     
-    <div>
-        <form>
-        <div class="center">
-          <input type="file" class="form-control file" id="uploadImage" />
-          <center><button type="button" class="btn btn-primary form-control w-25" onclick="changeImageToBase64()">計算する</button></center>  
-          <div id="uploadImageArea"></div> 
-          <br>
-        </div>
-        </form>
-
-        
-    </div>
+    <form>
+      <div class="center">
+        <input type="file" class="form-control file" id="uploadImage" />
+        <center><button type="button" class="btn btn-primary form-control w-25" onclick="changeImageToBase64()">計算する</button></center>  
+        <br>
+      </div>
+      <div id="uploadImageArea"></div> 
+    </form>
     
     <div>
         <center><p>計算結果</p></center>
-        <textarea id="result" class="calc" rows="6"></textarea> 
     </div>
   
   </body>
