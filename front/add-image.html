@@ -65,29 +65,30 @@
             },
             body: JSON.stringify(obj),
           })
-               .then(response => response.json())
+               //ここでデータを変換
+             .then(response => response.json())
                .then(data => {
-                //const name = data.sum.map(name => name.name).join(", ");
-                const price = data.sum(price => price.price).join(", ");
-                const kcal = data.sum.map(kcal => kcal.kcal).join(", ");
-                const protein = data.sum.map(protein => protein.protein).join(", ");
-                const fat = data.sum.map(fat => fat.fat).join(", ");
-                const carbohydrate = data.sum.map(carbohydrate => carbohydrate.carbohydrate).join(", ");
-                const salt = data.sum.map(salt => salt.salt).join(", ");
-                const calcium = data.sum.map(calcium => calcium.calcium).join(", ");
-                const vegetable = data.sum.map(vegetable => vegetable.vegetable).join(", ");
-                const recommendation = data.suggest;
-                document.getElementById("name").textContent = name;
-                document.getElementById("price").textContent = price;
-                document.getElementById("kcal").textContent = kcal;
-                document.getElementById("protein").textContent = protein;
-                document.getElementById("fat").textContent = fat;
-                document.getElementById("carbohydrate").textContent = carbohydrate;
-                document.getElementById("salt").textContent = salt;
-                document.getElementById("calcium").textContent = calcium;
-                document.getElementById("vegetable").textContent = vegetable;
-                document.getElementById("recommendation").textContent =recommendation ;
-             })
+                const price = data.sum.price;
+                const kcal = data.sum.kcal;
+                const protein = data.sum.protein;
+                const fat = data.sum.fat;
+  const carbohydrate = data.sum.carbohydrate;
+  const salt = data.sum.salt;
+  const calcium = data.sum.calcium;
+  const vegetable = data.sum.vegetable;
+  const suggestion = data.suggest;
+
+  document.getElementById("price").textContent = price;
+  document.getElementById("kcal").textContent = kcal;
+  document.getElementById("protein").textContent = protein;
+  document.getElementById("fat").textContent = fat;
+  document.getElementById("carbohydrate").textContent = carbohydrate;
+  document.getElementById("salt").textContent = salt;
+  document.getElementById("calcium").textContent = calcium;
+  document.getElementById("vegetable").textContent = vegetable;
+  document.getElementById("recommendation").textContent = suggestion;
+})
+
               .catch(error => console.error("An error occurred:", error));
           // base64Textにテキストをつけて、画像を#uploadImageAreaに表示
           document.querySelector('#base64text').value = base64Text
