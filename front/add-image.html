@@ -31,7 +31,7 @@
   <section class="wrapper">
       <div class="container">
           <div class="content">
-              <h2 class="heading">DRINK</h2>
+              <h2 class="heading">Calcurate page</h2>
               <div class="list">
                   <div class="list-item"> </div>
                   <div class="list-item"></div>
@@ -72,30 +72,31 @@
                 const kcal = data.sum.kcal;
                 const protein = data.sum.protein;
                 const fat = data.sum.fat;
-  const carbohydrate = data.sum.carbohydrate;
-  const salt = data.sum.salt;
-  const calcium = data.sum.calcium;
-  const vegetable = data.sum.vegetable;
-  const suggest = data.suggest;
-  const suggest_urls = data.suggest_url;
+                const carbohydrate = data.sum.carbohydrate;
+                const salt = data.sum.salt;
+                const calcium = data.sum.calcium;
+                const vegetable = data.sum.vegetable;
+                const suggest = data.suggest;
+                const suggest_urls = data.suggest_url;
 
-  document.getElementById("price").textContent = price;
-  document.getElementById("kcal").textContent = kcal;
-  document.getElementById("protein").textContent = protein;
-  document.getElementById("fat").textContent = fat;
-  document.getElementById("carbohydrate").textContent = carbohydrate;
-  document.getElementById("salt").textContent = salt;
-  document.getElementById("calcium").textContent = calcium;
-  document.getElementById("vegetable").textContent = vegetable;
-  document.getElementById("suggest").textContent = suggest;
-  const images = document.getElementById("images");
-  for(const suggest_url of suggest_urls) {
-    const img = document.createElement("img");
-    img.src = suggest_url;
-    images.appendChild(img);
-  }
-})
-
+               document.getElementById("price").textContent = price;
+               document.getElementById("kcal").textContent = kcal;
+               document.getElementById("protein").textContent = protein;
+               document.getElementById("fat").textContent = fat;
+               document.getElementById("carbohydrate").textContent = carbohydrate;
+               document.getElementById("salt").textContent = salt;
+               document.getElementById("calcium").textContent = calcium;
+               document.getElementById("vegetable").textContent = vegetable;
+               document.getElementById("suggest").textContent = suggest;
+               const images = document.getElementById("images");
+                    for(const suggest_url of suggest_urls) {
+                        const img = document.createElement("img");
+                       img.src = suggest_url;
+                       img.width = 150; // 幅を設定
+                       img.height = 100; // 高さを設定
+                      images.appendChild(img);
+                }
+               })
               .catch(error => console.error("An error occurred:", error));
           // base64Textにテキストをつけて、画像を#uploadImageAreaに表示
          // document.querySelector('#base64text').value = base64Text
@@ -115,11 +116,10 @@
           <section class="wrapper2">
             <div class="container">
                 <div class="content">
-                 
                     <div class="content-item">
                         <div id="uploadImageArea"></div>
                     </div>
-                    <div class="content2-item">
+                    <!-- <div class="content2-item">
                         <div class="text">
                             <h2 class="heading larger-heading" >Today's nuturient</h2>
                               <p>price: <span id="price"></span></p>
@@ -133,7 +133,48 @@
                               <p>suggestion: <span id="suggest"></span></p>
                               <p id="images">image: </span></p>      
                         </div>
-                  </div>
+                  </div> -->
+                  <table>
+
+                    <tr>
+                      <th>栄養素</th> <th>包含量</th> 
+                    </tr>
+                  
+                    <tr>
+                      <td>price</td> <td><span id="price"></span></td> 
+                    </tr>
+                    
+                    <tr>
+                      <td>kcal</td> <td><span id="kcal"></span></td> 
+                    </tr>
+                  
+                    <tr>
+                      <td>protein</td> <td><span id="protein"></span></td> 
+                    </tr>
+                    <tr>
+                      <td>fat</td> <td><span id="fat"></span></td> 
+                    </tr>
+                    <tr>
+                      <td>carbohydrate</td> <td><span id="carbohydrate"></span></td> 
+                    </tr>
+                    <tr>
+                      <td>salt</td> <td><span id="salt"></span></td> 
+                    </tr>
+                    <tr>
+                      <td>calcium</td> <td><span id="calcium"></span></td> 
+                    </tr>
+                    <tr>
+                      <td>vegetable</td> <td><span id="vegetable"></span></td> 
+                    </tr>
+                    <tr>
+                      <td>suggestion</td> <td><span id="suggest"></span></td> 
+                    </tr>
+                    <tr>
+                      <td> <p id="images">image: </span></p> </td> 
+                    </tr>
+                    
+                  
+                  </table>
                     
                     <style>
                       .content2-item {
@@ -142,13 +183,27 @@
                         justify-content: center; /* Center horizontally */
                         align-items: center; /* Center vertically */
                         text-align: center; /* Center text */
-                      }                      
+                      }   
+                    
+                    #images {
+                      display: flex; /* 画像を横に並べるために Flexbox を使用 */
+                    }
+                  
+                    .image-container {
+                      margin: 20px; /* 画像間の適切な距離を設定 */
+                    }
+                  
+                    .image-container img {
+                      max-width: 200px; /* 画像の最大幅を設定 */
+                      max-height: 100px; /* 画像の最大高さを設定 */
+                    }
                     </style>
                     
                 </div>
             </div>
           </section>
         </form>
+
 
 
 
