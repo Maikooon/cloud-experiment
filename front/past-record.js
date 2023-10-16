@@ -1,4 +1,4 @@
-import './css/style.css';
+import './style.css';
 import 'bulma/css/bulma.css';
 import { DefaultApi } from './api/index.ts';
 
