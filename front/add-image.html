@@ -57,12 +57,11 @@
           const base64Text = event.currentTarget.result
           // json形式にする
           const obj = {"attatchment":{"base64":base64Text}};
-
           // Post通信
           fetch("https://yprgdia3yl.execute-api.us-east-1.amazonaws.com/dev/upload", {
             method: "POST",
             headers:{
-              'Content-Type': 'applicarion/json'
+              'Content-Type': 'application/json'
             },
             body: JSON.stringify(obj),
           })
