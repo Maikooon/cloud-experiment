@@ -39,24 +39,48 @@ paths:
               schema:
                 type: object
                 properties:
-                  name:
-                    type: string
-                  price:
-                    type: number
-                  kcal:
-                    type: number
-                  protein:
-                    type: number
-                  fat:
-                    type: number
-                  carbonhydrate:
-                    type: number
-                  salt:
-                    type: number
-                  calcium:
-                    type: number
-                  vegetable:
-                    type: number
+                  menus:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        price:
+                          type: number
+                        kcal:
+                          type: number
+                        protein:
+                          type: number
+                        fat:
+                          type: number
+                        carbonhydrate:
+                          type: number
+                        salt:
+                          type: number
+                        calcium:
+                          type: number
+                        vegetable:
+                          type: number
+                  sum:
+                    type: object
+                    properties:
+                      price:
+                        type: number
+                      kcal:
+                        type: number
+                      protein:
+                        type: number
+                      fat:
+                        type: number
+                      carbonhydrate:
+                        type: number
+                      salt:
+                        type: number
+                      calcium:
+                        type: number
+                      vegetable:
+                        type: number
               examples:
                 例1:
                   value: |
@@ -94,6 +118,11 @@ paths:
                         "salt": 2.4,
                         "calcium": 6,
                         "vegetable": 60
-                      }
+                      },
+                      "suggest": "野菜食べろ",
+                      "suggest_url": [
+                        "https://example.com/hoge.png",
+                        "https://example.com/fuga.png"
+                      ]
                     }
                     
