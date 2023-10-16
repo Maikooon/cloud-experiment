@@ -1,4 +1,6 @@
 import './css/style.css';
+import './css/header.css';
+import './css/topImage.css';
 import 'bulma/css/bulma.css';
 import { DefaultApi } from './api/index.ts';
 

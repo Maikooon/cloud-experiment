@@ -1,79 +1,94 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>no title</title>
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sample Cafe</title>
+  <link rel="stylesheet" href="css/html5reset-1.6.1.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/topImage.css">
+</head>
+
+<body id="home">
+  <header id="top">
+      <nav>
+        <ul>
+          <li class="current"><a href="index.html">Home</a></li>
+          <li><a href="add-image.html">Calcurate nuturient</a></li>
+          <li><a href="show-menu.html">Menu</a></li>
+        </ul>
+      </nav>
+  </header>
+
   <body>
     <div id="app"></div>
     <script type="module" src="/main.js"></script>
+
     <!--ここから書き始めます-->
     <center>
-    <h1>Food Analyze</h1>
-<!--
-<body background="/images/food.jpg">
--->
-    <ul class="menu cf">
-      <li><a href="">calculate today's nuturient</a></li>
-      <li><a href="">menu item</a></li>
-      <li><a href="">3</a></li>
-      <li><a href="">4</a></li>
-    </ul>
-    <br><br><br>  <br><br><br>  <br><br><br>  
-
-    <!--ここからカード-->
-      <div class="card-group">
-        <div class="card">
-          <div class="card__imgframe"></div>
-          <div class="card__textbox">
-            <div class="card__titletext">
-              タイトルがはいります。タイトルがはいります。
-            </div>
-            <div class="card__overviewtext">
-              概要がはいります。概要がはいります。概要がはいります。概要がはいります。
-            </div>
+  <section class="wrapper">
+      <div class="container">
+          <div class="content">
+              <h2 class="heading">app name</h2>
+              <div class="list">
+                  <div class="list-item"> </div>
+                  <div class="list-item"></div>
+              </div>
           </div>
-        </div>
-        <div class="card">
-          <div class="card__imgframe"></div>
-          <div class="card__textbox">
-            <div class="card__titletext">
-              タイトルがはいります。タイトルがはいります。
-            </div>
-            <div class="card__overviewtext">
-              概要がはいります。概要がはいります。概要がはいります。概要がはいります。
-            </div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card__imgframe"></div>
-          <div class="card__textbox">
-            <div class="card__titletext">
-              タイトルがはいります。タイトルがはいります。
-            </div>
-            <div class="card__overviewtext">
-              概要がはいります。概要がはいります。概要がはいります。概要がはいります。
-            </div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card__imgframe"></div>
-          <div class="card__textbox">
-            <div class="card__titletext">
-              タイトルがはいります。タイトルがはいります。
-            </div>
-            <div class="card__overviewtext">
-              概要がはいります。概要がはいります。概要がはいります。概要がはいります。
-            </div>
-          </div>
-        </div>
       </div>
-      
+  </section>
+
+    <div class="menu-overlay">
+      <ul class="menu cf">
+        <li><a href="add-image.html">calculate nutrient</a></li>
+        <li><a href="show-menu.html">menu item</a></li>
+        <li><a href="past-record.html">past record</a></li>
+      </ul>
     </div>
-    <p><button onclick="location.href='./add-image.html'">遷移</button></p>
-    
- </center>>
+
+    <!-- レコメンド表示 -->
+    <section class="wrapper2">
+      <div class="container">
+          <div class="content">
+              <div class="content-item">
+                  <img src="../static/pict/top.png" class="image">
+              </div>
+              <div class="content-item">
+                  <div class="text">
+                      <h2 class="heading">本日のおススメ！</h2>
+                      <p>本日のおすすめはこのうどんです！　ほうれん草などと一緒に食べるといいです！</p>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+  
+  <!-- 目次 -->
+    <section class="wrapper3">
+      <div class="container">
+          <div class="content">
+              <h2 class="heading">Another Service</h2>
+              <div class="list">
+                  <div class="list-item">
+                      <img src="https://dutoit6.com/wp-content/uploads/2016/11/math0.png" class="image">
+                      <div class="text">ここからは写真をアップロードすることで栄養素を計算できます</div>
+                  </div>
+                  <div class="list-item">
+                      <img src="https://nosh.jp/magazine/wp-content/uploads/2022/08/AdobeStock_394899853.jpg" class="image">
+                      <div class="text">ここからはメニュー一覧を見ることができます</div>
+                  </div>
+                  <div class="list-item">
+                      <img src="data:image/jpeg;base64,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" class="image">
+                      <div class="text">過去の栄養素も計算することができます</div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+    </div>
+ </center>
    
   </body>
 </html>

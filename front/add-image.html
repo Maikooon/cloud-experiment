@@ -1,14 +1,52 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>栄養表示ページ</title>
-    <link rel="stylesheet" href="css/style.css">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sample Cafe</title>
+  <link rel="stylesheet" href="css/html5reset-1.6.1.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/topImage.css">
+</head>
+
+<body id="home">
+  <header id="top">
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li class = "current"><a href="add-image.html">Calcurate nuturient</a></li>
+          <li><a href="show-menu.html">Menu</a></li>
+        </ul>
+      </nav>
+  </header>
+
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/main.js"></script>
+
+    <!--ここから書き始めます-->
+    <center>
+  <section class="wrapper">
+      <div class="container">
+          <div class="content">
+              <h2 class="heading">DRINK</h2>
+              <div class="list">
+                  <div class="list-item"> </div>
+                  <div class="list-item"></div>
+              </div>
+          </div>
+      </div>
+  </section>
+  <br><br>
+
+  <!-- いかにページ別のコードを書きます -->
+  <meta charset="UTF-8" />
+   <meta name="viewport" content="500px" height="100px" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script type="module">
-      import json from "./data.json" assert { type: "json" };
-      // 画像を読み込んだら関数実行
+    <script>
+        /* ビューポートの設定 */
       function changeImageToBase64() {
         const uploadImage = document.querySelector('#uploadImage')
         const file = uploadImage.files[0]
@@ -20,50 +58,100 @@
         // ファイルを読み取った後にコールバックで行われる処理
         reader.onload = (event) => {
           const base64Text = event.currentTarget.result
-           // json形式にする
+          // json形式にする
           const obj = {"attatchment":{"base64":base64Text}};
           // Post通信
-          const postRes = fetch("https://yprgdia3yl.execute-api.us-east-1.amazonaws.com/dev/upload", {
+          fetch("https://yprgdia3yl.execute-api.us-east-1.amazonaws.com/prod/upload", {
             method: "POST",
             headers:{
-              'Content-Type': 'applicarion/json'
+              'Content-Type': 'application/json'
             },
             body: JSON.stringify(obj),
-          });
-          // base64Textにテキストをつけて、画像を#uploadImageAreaに表示
-          document.querySelector('#base64text').value = base64Text;
-          document.querySelector('#uploadImageArea').innerHTML = `<img src="${base64Text}" width="100%" />`;
-          
-          // jsonデータを読み込む(json)
-          const parsed = JSON.parse(json);
-          document.querySelector('#result').value = parsed
-          console.dir(obj);
+          })
+               //ここでデータを変換
+             .then(response => response.json())
+               .then(data => {
+                const price = data.sum.price;
+                const kcal = data.sum.kcal;
+                const protein = data.sum.protein;
+                const fat = data.sum.fat;
+  const carbohydrate = data.sum.carbohydrate;
+  const salt = data.sum.salt;
+  const calcium = data.sum.calcium;
+  const vegetable = data.sum.vegetable;
+  const suggestion = data.suggest;
 
+  document.getElementById("price").textContent = price;
+  document.getElementById("kcal").textContent = kcal;
+  document.getElementById("protein").textContent = protein;
+  document.getElementById("fat").textContent = fat;
+  document.getElementById("carbohydrate").textContent = carbohydrate;
+  document.getElementById("salt").textContent = salt;
+  document.getElementById("calcium").textContent = calcium;
+  document.getElementById("vegetable").textContent = vegetable;
+  document.getElementById("recommendation").textContent = suggestion;
+})
+
+              .catch(error => console.error("An error occurred:", error));
+          // base64Textにテキストをつけて、画像を#uploadImageAreaに表示
+          document.querySelector('#base64text').value = base64Text
+          document.querySelector('#uploadImageArea').innerHTML = `<img src="${base64Text}" width="40%" />`   
         }
         reader.readAsDataURL(file)
         
       }
     </script>
-  </head>
-  <body>
-    <div id="main">
-      <center><p>今日のご飯をアップロードする</p></center>
-    </div>
-    
-    <form>
-      <div class="center">
-        <input type="file" class="form-control file" id="uploadImage" />
-        <center><button type="button" class="btn btn-primary form-control w-25" onclick="changeImageToBase64()">計算する</button></center>  
-        <br>
+
+          <form>
+            <div class="center">
+              <input type="file" class="form-control me-2" id="uploadImage" /><br><br>
+              <button type="button" class="btn btn-primary form-control w-25" onclick="changeImageToBase64()">計算する</button><br>
+            </div> 
+          <!--base64に変更したものを表示-->
+          <textarea id="base64text" class="form-control mb-3" rows="1"></textarea> 
+          <section class="wrapper2">
+            <div class="container">
+                <div class="content">
+                    <div class="content-item">
+                        <div id="uploadImageArea"></div>
+                    </div>
+                    <div class="content-item">
+                        <div class="text">
+                            <h2 class="heading">Today's nuturient</h2>
+                              <p>price: <span id="price"></span></p>
+                              <p>kcal: <span id="kcal"></span></p>
+                              <p>protein <span id="protein"></span></p>
+                              <p>fat: <span id="fat"></span></p>
+                              <p>carbohydrate: <span id="carbohydrate"></span></p>
+                              <p>salt: <span id="salt"></span></p>
+                              <p>calcium: <span id="calcium"></span></p>
+                              <p>vegetable: <span id="vegetable"></span></p>
+                              <p>recommendation: <span id="reconmmendation"></span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        </form>
+      </div> 
+      
+      <div>
+          
+
+        <!-- ここからが本番用 ,URL からデータを撮ってくる-->
+           
       </div>
-      <div id="uploadImageArea"></div> 
-    </form>
-    
-    <div>
-        <center><p>計算結果</p></center>
-    </div>
+  <!-- ここまで -->
   
+  <p><button onclick="location.href='./index.html'" style="background-color: orange; border-radius: 50px;"> back </button></p>
+  
+
+    
+  
+    
+
+    
+ </center>
+   
   </body>
 </html>
-
-
