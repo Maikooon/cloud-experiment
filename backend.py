@@ -162,7 +162,7 @@ def lambda_handler(event, context):
     
     d = create_dict(search_menu(input, menu_list), menu_list)
     pic, d['suggest'] = suggestion(d, nutrients)
-    d['suggest_url'] = "https://suzuka-testbucket.s3.amazonaws.com/" + pic
+    d['suggest_url'] = ["https://suzuka-testbucket.s3.amazonaws.com/" + pic, "https://suzuka-testbucket.s3.amazonaws.com/50.jpg"]
     
     return {
         'statusCode': 200,
