@@ -76,12 +76,13 @@
     </script>
       <div>
           <form>
-          <div class="mb-3 d-flex">
-            <input type="file" class="form-control me-2" id="uploadImage" />
+          <div class="center">
+            <input type="file" class="form-control me-2" id="uploadImage" /><br><br>
             <button type="button" class="btn btn-primary form-control w-25" onclick="changeImageToBase64()">計算する</button>
           </div>
+          <br>
+          <br>
           <!-- base64に変更したものを表示-->
-          <textarea id="base64text" class="form-control mb-3" rows="6"></textarea> 
           <section class="wrapper2">
             <div class="container">
                 <div class="content">
@@ -124,7 +125,7 @@
 
         <!-- ここからが本番用 ,URL からデータを撮ってくる-->
            <script>
-            fetch("https://pokeapi.co/api/v2/pokemon/1/")
+            fetch("")
                .then(response => response.json())
                .then(data => {
                 const name = data.sum.map(name => name.name).join(", ");
