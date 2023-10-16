@@ -141,8 +141,8 @@ def suggestion(dict, nutrients):
     
 def lambda_handler(event, context):
     
-    bucket="suzuka-testbucket"
-    document="S__61128775.jpg"
+    bucket="mqtt-test-hogehogehoge"
+    document="C415A030-37CB-442C-9D6E-63B1BA20DC34.png"
     client = boto3.client('textract')
 
     #process using S3 object
@@ -161,5 +161,11 @@ def lambda_handler(event, context):
     
     return {
         'statusCode': 200,
+        'headers': {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Headers': 'Content-Type',
+            'Access-Control-Allow-Origin': 'http://localhost:5173',
+            'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
+        },
         'body': json.dumps(d)
-    }                
+    }
