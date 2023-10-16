@@ -1,6 +1,7 @@
 import json
 import boto3
 import difflib
+import base64
 
 nutrients = {'kcal' : 2650 , 'protein' : 65, 'calcium' : 800, 'vegetable' : 21}
 
@@ -140,14 +141,17 @@ def suggestion(dict, nutrients):
         return menu_list[menu_idx][11], '野菜が' + str(nutrients['vegetable'] - dict['sum']['vegetable']) + '不足しています．' + menu_list[menu_idx][0] + 'を提案します．また，カルシウムが' + str(nutrients['calcium'] - dict['sum']['calcium']) + '不足しています．ほうれん草のごまあえを提案します．'
     
 def lambda_handler(event, context):
-    
-    bucket="suzuka-testbucket"
-    document="S__61128775.jpg"
     client = boto3.client('textract')
-
-    #process using S3 object
+    
+    body = json.loads(event.get('body'));
+    base64_with_head = body.get('attatchment').get('base64')
+    b64 = base64_with_head.split("base64,", 1)[1]
+    
+    byte_array = base64.b64decode(b64)
+    
     response = client.detect_document_text(
-        Document={'S3Object': {'Bucket': bucket, 'Name': document}})
+        Document={'Bytes': byte_array })
+
 
     #Get the text blocks
     blocks=response['Blocks']
