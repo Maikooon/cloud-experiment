@@ -58,7 +58,7 @@
           // json形式にする
           const obj = {"attatchment":{"base64":base64Text}};
           // Post通信
-          fetch("https://yprgdia3yl.execute-api.us-east-1.amazonaws.com/dev/upload", {
+          fetch("https://yprgdia3yl.execute-api.us-east-1.amazonaws.com/prod/upload", {
             method: "POST",
             headers:{
               'Content-Type': 'application/json'
@@ -67,8 +67,8 @@
           })
                .then(response => response.json())
                .then(data => {
-                const name = data.sum.map(name => name.name).join(", ");
-                const price = data.sum.map(price => price.price).join(", ");
+                //const name = data.sum.map(name => name.name).join(", ");
+                const price = data.sum(price => price.price).join(", ");
                 const kcal = data.sum.map(kcal => kcal.kcal).join(", ");
                 const protein = data.sum.map(protein => protein.protein).join(", ");
                 const fat = data.sum.map(fat => fat.fat).join(", ");
@@ -76,7 +76,7 @@
                 const salt = data.sum.map(salt => salt.salt).join(", ");
                 const calcium = data.sum.map(calcium => calcium.calcium).join(", ");
                 const vegetable = data.sum.map(vegetable => vegetable.vegetable).join(", ");
-                const recommendation = data.recommendation;
+                const recommendation = data.suggest;
                 document.getElementById("name").textContent = name;
                 document.getElementById("price").textContent = price;
                 document.getElementById("kcal").textContent = kcal;
