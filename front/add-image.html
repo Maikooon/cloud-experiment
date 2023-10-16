@@ -76,7 +76,8 @@
   const salt = data.sum.salt;
   const calcium = data.sum.calcium;
   const vegetable = data.sum.vegetable;
-  const suggestion = data.suggest;
+  const suggest = data.suggest;
+  const suggest_url = data.suggest_url;
 
   document.getElementById("price").textContent = price;
   document.getElementById("kcal").textContent = kcal;
@@ -86,12 +87,14 @@
   document.getElementById("salt").textContent = salt;
   document.getElementById("calcium").textContent = calcium;
   document.getElementById("vegetable").textContent = vegetable;
-  document.getElementById("recommendation").textContent = suggestion;
+  document.getElementById("suggest").textContent = suggest;
+  document.getElementById("suggest_url").src = suggest_url;
+
 })
 
               .catch(error => console.error("An error occurred:", error));
           // base64Textにテキストをつけて、画像を#uploadImageAreaに表示
-          document.querySelector('#base64text').value = base64Text
+         // document.querySelector('#base64text').value = base64Text
           document.querySelector('#uploadImageArea').innerHTML = `<img src="${base64Text}" width="40%" />`   
         }
         reader.readAsDataURL(file)
@@ -101,19 +104,19 @@
           <form>
             <div class="center">
               <input type="file" class="form-control me-2" id="uploadImage" /><br><br>
-              <button type="button" class="btn btn-primary form-control w-25" onclick="changeImageToBase64()">計算する</button><br>
+              <button type="button" class="btn btn-primary form-control w-25" onclick="changeImageToBase64()">計算する</button><br><br><br>
             </div> 
           <!--base64に変更したものを表示-->
-          <textarea id="base64text" class="form-control mb-3" rows="1"></textarea> 
+          <!-- <textarea id="base64text" class="form-control mb-3" rows="1"></textarea>  -->
           <section class="wrapper2">
             <div class="container">
                 <div class="content">
                     <div class="content-item">
                         <div id="uploadImageArea"></div>
                     </div>
-                    <div class="content-item">
+                    <div class="content2-item">
                         <div class="text">
-                            <h2 class="heading">Today's nuturient</h2>
+                            <h2 class="heading larger-heading" >Today's nuturient</h2>
                               <p>price: <span id="price"></span></p>
                               <p>kcal: <span id="kcal"></span></p>
                               <p>protein <span id="protein"></span></p>
@@ -122,13 +125,40 @@
                               <p>salt: <span id="salt"></span></p>
                               <p>calcium: <span id="calcium"></span></p>
                               <p>vegetable: <span id="vegetable"></span></p>
-                              <p>recommendation: <span id="reconmmendation"></span></p>
+                              <p>suggestion: <span id="suggest"></span></p>
+                              <p>image: <img src="suggest_url" ></span></p>
+                              <script>
+                                var photoElement = document.getElementById('photo');
+                                photoElement.addEventListener('click',changePhoto)
+                                
+                                function changePhoto() {
+                                    var photo = 'images/02.png';
+                                    photoElement.setAttribute('src',photo);
+                                }
+                            </script>       
+
                         </div>
+                       
                     </div>
+                    
+                    <style>
+                      .content2-item {
+                        font-size: 20px;
+                        display: flex;
+                        justify-content: center; /* Center horizontally */
+                        align-items: center; /* Center vertically */
+                        text-align: center; /* Center text */
+                      }                      
+                    </style>
+                    
                 </div>
             </div>
-        </section>
+          </section>
         </form>
+
+
+
+
       </div> 
       
       <div>
@@ -140,13 +170,6 @@
   <!-- ここまで -->
   
   <p><button onclick="location.href='./index.html'" style="background-color: orange; border-radius: 50px;"> back </button></p>
-  
-
-    
-  
-    
-
-    
  </center>
    
   </body>
