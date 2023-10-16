@@ -50,11 +50,8 @@
       function changeImageToBase64() {
         const uploadImage = document.querySelector('#uploadImage')
         const file = uploadImage.files[0]
-
         const reader = new FileReader()
-
-           
-          
+ 
         // ファイルを読み取った後にコールバックで行われる処理
         reader.onload = (event) => {
           const base64Text = event.currentTarget.result
@@ -68,37 +65,36 @@
             },
             body: JSON.stringify(obj),
           })
-               //ここでデータを変換
-             .then(response => response.json())
-               .then(data => {
-                const price = data.sum.price;
-                const kcal = data.sum.kcal;
-                const protein = data.sum.protein;
-                const fat = data.sum.fat;
-  const carbohydrate = data.sum.carbohydrate;
-  const salt = data.sum.salt;
-  const calcium = data.sum.calcium;
-  const vegetable = data.sum.vegetable;
-  const suggestion = data.suggest;
+          //ここでデータを変換
+          .then(response => response.json())
+          .then(data => {
+            const price = data.sum.price;
+            const kcal = data.sum.kcal;
+            const protein = data.sum.protein;
+            const fat = data.sum.fat;
+            const carbohydrate = data.sum.carbohydrate;
+            const salt = data.sum.salt;
+            const calcium = data.sum.calcium;
+            const vegetable = data.sum.vegetable;
+            const suggestion = data.suggest;
+            document.getElementById("price").textContent = price;
+            document.getElementById("kcal").textContent = kcal;
+            document.getElementById("protein").textContent = protein;
+            document.getElementById("fat").textContent = fat;
+            document.getElementById("carbohydrate").textContent = carbohydrate;
+            document.getElementById("salt").textContent = salt;
+            document.getElementById("calcium").textContent = calcium;
+            document.getElementById("vegetable").textContent = vegetable;
+            document.getElementById("recommendation").textContent = suggestion;
+          })
 
-  document.getElementById("price").textContent = price;
-  document.getElementById("kcal").textContent = kcal;
-  document.getElementById("protein").textContent = protein;
-  document.getElementById("fat").textContent = fat;
-  document.getElementById("carbohydrate").textContent = carbohydrate;
-  document.getElementById("salt").textContent = salt;
-  document.getElementById("calcium").textContent = calcium;
-  document.getElementById("vegetable").textContent = vegetable;
-  document.getElementById("recommendation").textContent = suggestion;
-})
-
-              .catch(error => console.error("An error occurred:", error));
+          .catch(error => console.error("An error occurred:", error));
           // base64Textにテキストをつけて、画像を#uploadImageAreaに表示
-          document.querySelector('#base64text').value = base64Text
+          
+          // document.querySelector('#base64text').value = base64Text
           document.querySelector('#uploadImageArea').innerHTML = `<img src="${base64Text}" width="40%" />`   
         }
         reader.readAsDataURL(file)
-        
       }
     </script>
 
@@ -108,7 +104,7 @@
               <button type="button" class="btn btn-primary form-control w-25" onclick="changeImageToBase64()">計算する</button><br>
             </div> 
           <!--base64に変更したものを表示-->
-          <textarea id="base64text" class="form-control mb-3" rows="1"></textarea> 
+          <!-- <textarea id="base64text" class="form-control mb-3" rows="1"></textarea> -->
           <section class="wrapper2">
             <div class="container">
                 <div class="content">
@@ -126,12 +122,16 @@
                               <p>salt: <span id="salt"></span></p>
                               <p>calcium: <span id="calcium"></span></p>
                               <p>vegetable: <span id="vegetable"></span></p>
-                              <p>recommendation: <span id="reconmmendation"></span></p>
+                              
                         </div>
                     </div>
                 </div>
+                <div class="recommend">
+                  <hr>
+                  <p>recommendation: <span id="reconmmendation"></span></p>
+                </div>
             </div>
-        </section>
+          </section>
         </form>
       </div> 
       
