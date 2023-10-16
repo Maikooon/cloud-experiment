@@ -77,7 +77,7 @@
   const calcium = data.sum.calcium;
   const vegetable = data.sum.vegetable;
   const suggest = data.suggest;
-  const suggest_url = data.suggest_url;
+  const suggest_url = data.suggest_url[0];
 
   document.getElementById("price").textContent = price;
   document.getElementById("kcal").textContent = kcal;
@@ -127,7 +127,7 @@
                               <p>calcium: <span id="calcium"></span></p>
                               <p>vegetable: <span id="vegetable"></span></p>
                               <p>suggestion: <span id="suggest"></span></p>
-                              <p>image: <img src="suggest_url" ></span></p>      
+                              <p>image: <img id="suggest_url" ></span></p>      
                         </div>
                   </div>
                     
