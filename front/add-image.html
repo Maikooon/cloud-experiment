@@ -55,18 +55,41 @@
         // ファイルを読み取った後にコールバックで行われる処理
         reader.onload = (event) => {
           const base64Text = event.currentTarget.result
-
           // json形式にする
           const obj = {"attatchment":{"base64":base64Text}};
+
           // Post通信
-          const postRes = fetch("https://yprgdia3yl.execute-api.us-east-1.amazonaws.com/dev/upload", {
+          fetch("https://yprgdia3yl.execute-api.us-east-1.amazonaws.com/dev/upload", {
             method: "POST",
             headers:{
               'Content-Type': 'applicarion/json'
             },
             body: JSON.stringify(obj),
-          });
-          
+          })
+               .then(response => response.json())
+               .then(data => {
+                const name = data.sum.map(name => name.name).join(", ");
+                const price = data.sum.map(price => price.price).join(", ");
+                const kcal = data.sum.map(kcal => kcal.kcal).join(", ");
+                const protein = data.sum.map(protein => protein.protein).join(", ");
+                const fat = data.sum.map(fat => fat.fat).join(", ");
+                const carbohydrate = data.sum.map(carbohydrate => carbohydrate.carbohydrate).join(", ");
+                const salt = data.sum.map(salt => salt.salt).join(", ");
+                const calcium = data.sum.map(calcium => calcium.calcium).join(", ");
+                const vegetable = data.sum.map(vegetable => vegetable.vegetable).join(", ");
+                const recommendation = data.recommendation;
+                document.getElementById("name").textContent = name;
+                document.getElementById("price").textContent = price;
+                document.getElementById("kcal").textContent = kcal;
+                document.getElementById("protein").textContent = protein;
+                document.getElementById("fat").textContent = fat;
+                document.getElementById("carbohydrate").textContent = carbohydrate;
+                document.getElementById("salt").textContent = salt;
+                document.getElementById("calcium").textContent = calcium;
+                document.getElementById("vegetable").textContent = vegetable;
+                document.getElementById("recommendation").textContent =recommendation ;
+             })
+              .catch(error => console.error("An error occurred:", error));
           // base64Textにテキストをつけて、画像を#uploadImageAreaに表示
           document.querySelector('#base64text').value = base64Text
           document.querySelector('#uploadImageArea').innerHTML = `<img src="${base64Text}" width="40%" />`   
@@ -74,13 +97,13 @@
         reader.readAsDataURL(file)
       }
     </script>
-      <div>
+
           <form>
-          <div class="center">
-            <input type="file" class="form-control me-2" id="uploadImage" /><br><br>
-            <button type="button" class="btn btn-primary form-control w-25" onclick="changeImageToBase64()">計算する</button><br>
-          </div>
-          <!-- base64に変更したものを表示-->
+            <div class="center">
+              <input type="file" class="form-control me-2" id="uploadImage" /><br><br>
+              <button type="button" class="btn btn-primary form-control w-25" onclick="changeImageToBase64()">計算する</button><br>
+            </div> 
+          <!--base64に変更したものを表示-->
           <textarea id="base64text" class="form-control mb-3" rows="1"></textarea> 
           <section class="wrapper2">
             <div class="container">
@@ -106,53 +129,13 @@
             </div>
         </section>
         </form>
-      </div>
+      </div> 
       
       <div>
-          <script>
-           fetch("https://pokeapi.co/api/v2/pokemon/1/")
-              .then(response => response.json())
-              .then(data => {
-               const abilities = data.abilities.map(ability => ability.ability.name).join(", ");
-               const slot = data.abilities.map(slot => slot.slot).join(", ");
-
-               document.getElementById("abilities").textContent = abilities;
-               document.getElementById("slot").textContent = slot;
-            })
-             .catch(error => console.error("An error occurred:", error));
-           </script>
+          
 
         <!-- ここからが本番用 ,URL からデータを撮ってくる-->
-           <script>
-            fetch("https://pokeapi.co/api/v2/pokemon/1/")
-               .then(response => response.json())
-               .then(data => {
-                const name = data.sum.map(name => name.name).join(", ");
-
-                const price = data.sum.map(price => price.price).join(", ");
-                const kcal = data.sum.map(kcal => kcal.kcal).join(", ");
-                const protein = data.sum.map(protein => protein.protein).join(", ");
-                const fat = data.sum.map(fat => fat.fat).join(", ");
-                const carbohydrate = data.sum.map(carbohydrate => carbohydrate.carbohydrate).join(", ");
-                const salt = data.sum.map(salt => salt.salt).join(", ");
-                const calcium = data.sum.map(calcium => calcium.calcium).join(", ");
-                const vegetable = data.sum.map(vegetable => vegetable.vegetable).join(", ");
-                const recommendation = data.recommendation;
- 
-                document.getElementById("name").textContent = name;
-                document.getElementById("price").textContent = price;
-                document.getElementById("kcal").textContent = kcal;
-                document.getElementById("protein").textContent = protein;
-                document.getElementById("fat").textContent = fat;
-                document.getElementById("carbohydrate").textContent = carbohydrate;
-                document.getElementById("salt").textContent = salt;
-                document.getElementById("calcium").textContent = calcium;
-                document.getElementById("vegetable").textContent = vegetable;
-                document.getElementById("recommendation").textContent =recommendation ;
-
-             })
-              .catch(error => console.error("An error occurred:", error));
-            </script>
+           
       </div>
   <!-- ここまで -->
   
