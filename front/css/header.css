@@ -1,5 +1,6 @@
 header {
-	border-top: 8px solid #8c6239;
+	border-top: 20px solid #8c6239;
+	font-size: larger;
 }
 
 .header_logo {
